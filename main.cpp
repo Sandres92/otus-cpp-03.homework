@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "lib.h"
+#include "custom_allocator.h"
 
 int main(int, char **)
 {
