@@ -9,8 +9,8 @@ option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
 configure_file(version.h.in version.h)
 
-add_executable(allocator_cli main.cpp custom_allocator.h custom_allocator.cpp)
-add_library(allocator lib.cpp)
+add_executable(allocator_cli main.cpp custom_allocator.h)
+add_library(allocator lib.cpp utils.cpp)
 
 set_target_properties(allocator_cli allocator PROPERTIES
     CXX_STANDARD 14

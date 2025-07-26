@@ -6,6 +6,7 @@ namespace otus
     template <class T, size_t size>
     class CustomAllocator
     {
+    public:
         using value_type = T;
 
         using pointer = T *;
@@ -13,37 +14,46 @@ namespace otus
         using reference = T &;
         using const_reference = const T &;
 
-        CustomAllocator() : current(0) = default;
+        template <typename U>
+        struct rebind
+        {
+            using other = CustomAllocator<U, size>;
+        };
 
-        template <class U>
-        CustomAllocator(const CustomAllocator<T> &other) = default;
+        CustomAllocator() : position(0) {};
+        ~CustomAllocator() = default;
+
+        // template <class U>
+        // CustomAllocator(const CustomAllocator<U, size_t> &){};
 
         T *allocate(std::size_t n)
         {
             if (n == 0)
             {
-                std::invalid_argument("invalid_argument size alloc");
+                throw std::invalid_argument("invalid_argument size alloc");
             }
 
             if (position + n > size)
             {
-                std::bad_alloc();
+                throw std::bad_alloc();
             }
 
-            T *p = reinterpret_cast<T *>(&buffer[position]);
+            T *p = reinterpret_cast<T *>(&buffer[position * sizeof(T)]);
             position += n;
             return p;
         }
 
         void deallocate(T *p, std::size_t n)
         {
+            (void)p;
+            (void)n;
         }
 
         template <typename U, typename... Args>
         void construct(U *p, Args &&...args)
         {
             new (p) U(std::forward<Args>(args)...);
-        };
+        }
 
         template <typename U>
         void destroy(U *p)
