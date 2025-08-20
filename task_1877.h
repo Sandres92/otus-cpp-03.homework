@@ -37,5 +37,5 @@ namespace otus
     //
     //    return false;
     //}
-    bool task_1877(const std::vector<int> &code1, const std::vector<int> &code2);
+    bool task_1877(const std::vector<unsigned int> &code1, const std::vector<unsigned int> &code2);
 }

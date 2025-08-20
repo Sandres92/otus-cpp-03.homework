@@ -2,10 +2,10 @@
 
 namespace otus
 {
-    bool task_1877(const std::vector<int> &code1, const std::vector<int> &code2)
+    bool task_1877(const std::vector<unsigned int> &code1, const std::vector<unsigned int> &code2)
     {
 
-        auto vectorToNumber = [](const std::vector<int> &codeVec) -> unsigned int
+        auto vectorToNumber = [](const std::vector<unsigned int> &codeVec) -> unsigned int
         {
             unsigned int code = 0;
             int multiplayer = 10;
