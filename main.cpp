@@ -3,11 +3,14 @@
 #include <map>
 #include <forward_list>
 #include <vector>
+#include <string>
 
 #include "lib.h"
 #include "custom_allocator.h"
 #include "utils.h"
 #include "custom_forward_list.h"
+#include "task_1409.h"
+#include "task_1877.h"
 
 #define MAP_NUMBER 10
 
@@ -23,7 +26,7 @@ int main(int, char **)
     std::cout << i << " " << m1[i] << "\n";
   }
 
-  std::cout << "================= 1 \n";
+  std::cout << "std map, custom allocator =================\n";
   std::map<int, int,
            std::less<>,
            otus::CustomAllocator<std::pair<int, int>, MAP_NUMBER>>
@@ -34,7 +37,7 @@ int main(int, char **)
     std::cout << i << " " << m2[i] << "\n";
   }
 
-  std::cout << "================= 2 \n";
+  std::cout << "std forward_list, custom allocator =================\n";
   std::forward_list<int, otus::CustomAllocator<int, MAP_NUMBER>> fl;
 
   for (size_t i = 0; i != MAP_NUMBER; ++i)
@@ -50,7 +53,7 @@ int main(int, char **)
   std::vector<int> v;
   v.reserve(5);
 
-  std::cout << "================= 3 \n";
+  std::cout << "custom ForwardList, std allocator =================\n";
   otus::CustomForwardList<int> cfl1;
   for (size_t i = 0; i != MAP_NUMBER; ++i)
   {
@@ -62,7 +65,7 @@ int main(int, char **)
     std::cout << elem << "\n";
   }
 
-  std::cout << "================= 4 \n";
+  std::cout << "custom ForwardList,custom allocator =================\n";
   otus::CustomForwardList<int, otus::CustomAllocator<int, MAP_NUMBER>> cfl2;
   for (size_t i = 0; i != MAP_NUMBER; ++i)
   {
@@ -73,6 +76,32 @@ int main(int, char **)
   {
     std::cout << elem << "\n";
   }
+
+  // unsigned int harry, larry;
+  // std::cin >> harry >> larry;
+  // auto result = otus::task_1409_vt(harry, larry);
+  // std::cout << std::get<0>(result) << " " << std::get<1>(result) << "\n";
+
+  std::string code1Str;
+  std::string code2Str;
+  std::cin >> code1Str;
+  std::cin >> code2Str;
+
+  std::vector<int> code1(code1Str.size());
+  for (char digit : code1Str)
+  {
+    code1.push_back(digit - '0');
+  }
+
+  std::vector<int> code2(code2Str.size());
+  for (char digit : code2Str)
+  {
+    code2.push_back(digit - '0');
+  }
+
+  bool isHack = otus::task_1877(code1, code2);
+
+  std::cout << (isHack ? "yes" : "no") << "\n";
 
   return 0;
 }

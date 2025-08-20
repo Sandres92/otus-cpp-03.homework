@@ -9,11 +9,19 @@ option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
 configure_file(version.h.in version.h)
 
-add_executable(allocator_cli main.cpp custom_allocator.h)
+add_executable(allocator_cli 
+                main.cpp 
+                custom_allocator.h 
+                custom_forward_list.h
+                task_1409.h
+                task_1409.cpp
+                task_1877.h
+                task_1877.cpp)
+
 add_library(allocator lib.cpp utils.cpp)
 
 set_target_properties(allocator_cli allocator PROPERTIES
-    CXX_STANDARD 14
+    CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
@@ -30,7 +38,7 @@ if(WITH_BOOST_TEST)
     add_executable(test_allocator test_allocator.cpp)
 
     set_target_properties(test_allocator PROPERTIES
-        CXX_STANDARD 14
+        CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
     )
 
