@@ -15,6 +15,7 @@
 int main(int, char **)
 {
   std::cout << "Version: " << version() << std::endl;
+
   std::cout << "std map, std allocator =================\n";
 
   std::map<int, int> m1;
