@@ -62,7 +62,7 @@ namespace otus
         }
 
     private:
-        alignas(T) char buffer[size * sizeof(T)];
         size_t position = 0;
+        alignas(T) char buffer[size * sizeof(T)];
     };
 }

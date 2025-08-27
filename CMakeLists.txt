@@ -12,13 +12,7 @@ configure_file(version.h.in version.h)
 add_executable(allocator_cli 
                 main.cpp 
                 custom_allocator.h 
-                custom_forward_list.h
-                task_1409.h
-                task_1409.cpp
-                task_1877.h
-                task_1877.cpp
-                task_2001.h
-                task_2001.cpp)
+                custom_forward_list.h)
 
 add_library(allocator lib.cpp utils.cpp)
 
