@@ -1,5 +1,7 @@
 #define BOOST_TEST_MODULE test_version
 
+#include <iostream>
+
 #include "lib.h"
 #include "custom_allocator.h"
 #include "utils.h"
@@ -122,6 +124,17 @@ BOOST_AUTO_TEST_CASE(test_allocator_6)
 	float *num = float_allocator.allocate(1);
 
 	BOOST_CHECK(num != nullptr);
+}
+
+BOOST_AUTO_TEST_CASE(test_allocator_7)
+{
+	otus::CustomAllocator<int, 4> allocator;
+	int *n = allocator.allocate(2);
+
+	allocator.deallocate(n, 2);
+	allocator.deallocate(n, 2);
+
+	BOOST_CHECK(allocator.GetPosition() == 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

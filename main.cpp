@@ -10,6 +10,8 @@
 #include "utils.h"
 #include "custom_forward_list.h"
 
+#include <cstdint>
+
 #define MAP_NUMBER 10
 
 int main(int, char **)

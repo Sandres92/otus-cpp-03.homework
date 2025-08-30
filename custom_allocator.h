@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <cstdint>
 
 namespace otus
 {
@@ -47,6 +48,16 @@ namespace otus
         {
             (void)p;
             (void)n;
+
+            if (is_p_in_buffer(p))
+            {
+                // position = std::uintptr_t(p) - std::uintptr_t(&buffer[0]);
+                position = 0;
+            }
+            else
+            {
+                ::operator delete(p);
+            }
         }
 
         template <typename U, typename... Args>
@@ -61,8 +72,19 @@ namespace otus
             p->~U();
         }
 
+        size_t GetPosition() const
+        {
+            return position;
+        }
+
     private:
         size_t position = 0;
         alignas(T) char buffer[size * sizeof(T)];
+
+        bool is_p_in_buffer(const T *p) const
+        {
+            return std::uintptr_t(p) >= std::uintptr_t(&buffer[0]) &&
+                   std::uintptr_t(p) < std::uintptr_t(&buffer[0]) + (size * sizeof(T));
+        }
     };
 }
